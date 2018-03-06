@@ -25,6 +25,14 @@ namespace RecipeFinder.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+<<<<<<< HEAD
+
+        public DbSet<Recipe> Recipes { get; set; }
+
+        public DbSet<Ingredient> Ingredients { get; set; }
+
+=======
+>>>>>>> 96883119ed277f18bde842bdf466aa3cb55fde0f
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

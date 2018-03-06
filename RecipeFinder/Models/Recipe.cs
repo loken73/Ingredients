@@ -17,6 +17,13 @@ namespace RecipeFinder.Models
 
         public string Instructions { get; set; }
 
+<<<<<<< HEAD
+        public virtual ApplicationUser User { get; set; }
+
+        public string ApplicationUserId { get; set; }
+
+=======
+>>>>>>> 96883119ed277f18bde842bdf466aa3cb55fde0f
         public Recipe()
         {
             Ingredients = new List<Ingredient>();
