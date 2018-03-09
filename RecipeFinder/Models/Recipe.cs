@@ -18,6 +18,7 @@ namespace RecipeFinder.Models
         public string Instructions { get; set; }
 
 
+
         public virtual ApplicationUser User { get; set; }
 
         public string ApplicationUserId { get; set; }

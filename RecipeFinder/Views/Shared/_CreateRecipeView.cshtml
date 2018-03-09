@@ -1,26 +1,35 @@
-﻿<div id="recipe-entry">
-    <form>
+﻿@model RecipeFinder.Models.Recipe
+
+<div id="recipe-entry">
+    @using (Html.BeginForm("Create", "Recipe", FormMethod.Post, new { role = "form" }))
+    {
         <h2>Create Recipe</h2>
+        @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="form-group log-reg-forms">
             <!--<div class="glyphicon-wrapper"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>-->
             <input class="login-input form-control" type="text" placeholder="Recipe Name...">
+            @Html.TextBoxFor(r => r.Name, new { @class = "form-control login-input", placeholder = "Recipe Name...", name = "recipeName" })
         </div>
         <div class="form-group log-reg-forms">
             <!--<div class="glyphicon-wrapper"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>-->
             <input class="login-input form-control" type="text" placeholder="Short Description">
+            @Html.TextBoxFor(r => r.Name, new { @class = "form-control login-input", placeholder = "Recipe Name...", name = "recipeName" })
         </div>
         <div class="form-group log-reg-forms">
-            <textarea class="form-control" cols="100" rows="5" placeholder="Please place each ingredient on a separate line"></textarea>
+            <!--<textarea class="form-control" cols="100" rows="5" placeholder="Please place each ingredient on a separate line"></textarea>-->
+            @Html.TextAreaFor(r => r.Ingredients, new { @class = "form-control", placeholder = "Please place each ingredient on a separate line", name = "ingredients", cols = "100", rows = "5" })
         </div>
         <div class="form-group log-reg-forms">
-            <textarea class="form-control" cols="100" rows="5" placeholder="Please place each instruction on a separate line"></textarea>
+            @*<textarea class="form-control" cols="100" rows="5" placeholder="Please place each instruction on a separate line"></textarea>*@
+            @Html.TextAreaFor(r => r.Instructions, new { @class = "form-control", placeholder = "Please place each instruction on a separate line", name = "instructions", cols = "100", rows = "5" })
         </div>
         <div class="form-group">
             <label>
                 Choose photo to upload
                 <input value="Choose Photo" type="file" id="recipe-photo" accept=".jpg, .jpeg, .png">
             </label>
+            @*Html.TextBoxFor(r => r., new { type = "file", id = "recipe-photo", accept = ".jpg, .jpeg, .png" })*@
         </div>
         <input type="submit" value="Create Recipe">
-    </form>
+    }
 </div>

@@ -9,7 +9,7 @@ namespace RecipeFinder.Interface
 {
     interface IRecipeRepository
     {
-        IEnumerable<Recipe> GetAllRecipes();
+        IEnumerable<Recipe> GetRecipes(int page, int pageSize);
 
         Recipe GetRecipeById(int id);
 
