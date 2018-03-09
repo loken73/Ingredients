@@ -1,20 +1,29 @@
-﻿<form class="whole-reg-form">
+﻿@model RecipeFinder.Models.RegisterViewModel
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "whole-reg-form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <!--<form class="whole-reg-form">-->
     <div class="register-form step-1">
         <h2>Register</h2>
         <section>
+            @Html.ValidationSummary("", new { @class = "text-danger" })
             <div class="form-group log-reg-forms">
                 <div class="glyphicon-wrapper"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
-                <input class="register-input form-control" type="text" placeholder="First Name" name="firstname">
+                <!--<input class="register-input form-control" type="text" placeholder="First Name" name="firstname">-->
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control register-input", placeholder = "First Name", name = "firstname" })
             </div>
             <div class="form-group log-reg-forms">
                 <div class="glyphicon-wrapper"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
-                <input class="register-input form-control" type="text" placeholder="Last Name" name="lastname">
+                <!--<input class="register-input form-control" type="text" placeholder="Last Name" name="lastname">-->
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control register-input", placeholder = "Last Name", name = "lastname" })
             </div>
             <div class="form-group log-reg-forms">
                 <div class="glyphicon-wrapper"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
-                <input class="register-input form-control" type="text" placeholder="Username" name="username">
+                <!--<input class="register-input form-control" type="text" placeholder="Username" name="username">-->
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control register-input", placeholder = "User Name", name = "username" })
             </div>
-            <div class="button-wrapper"><button class="step-transitions next">Next <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button></div>
+            <div class="button-wrapper"><div class="step-transitions next">Next <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div></div>
         </section>
         <ul id="progressbar">
             <li><span class="glyphicon glyphicon-ok active" aria-hidden="true"></span></li>
@@ -26,15 +35,18 @@
         <section>
             <div class="form-group log-reg-forms">
                 <div class="glyphicon-wrapper"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></div>
-                <input class="register-input form-control" type="email" placeholder="Email" name="email">
+                @*<input class="register-input form-control" type="email" placeholder="Email" name="email">*@
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control register-input", placeholder = "Email", name = "email" })
             </div>
             <div class="form-group log-reg-forms">
                 <div class="glyphicon-wrapper"><i class="fas fa-unlock-alt glyphicon"></i></div>
-                <input id="reg-password" class="register-input form-control" type="text" placeholder="Password" name="password">
+                @*<input id="reg-password" class="register-input form-control" type="text" placeholder="Password" name="password">*@
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control register-input", placeholder = "Password", name = "password", id = "reg-password" })
             </div>
             <div class="form-group log-reg-forms">
                 <div class="glyphicon-wrapper"><i class="fas fa-unlock-alt glyphicon"></i></div>
-                <input class="register-input form-control" type="text" placeholder="Confirm Password" name="confirmpassword">
+                @*<input class="register-input form-control" type="text" placeholder="Confirm Password" name="confirmpassword">*@
+                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control register-input", placeholder = "Confirm Password", name = "confirmpassword" })
             </div>
             <div class="button-wrapper"><input type="submit" class="submit-register" value="Submit" /></div>
         </section>
@@ -43,4 +55,5 @@
             <li><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
         </ul>
     </div>
-</form>
+<!--</form>-->
+}

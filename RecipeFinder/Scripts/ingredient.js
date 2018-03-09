@@ -2,6 +2,8 @@ $(document).ready(function () {
     
     var modalBack = $("#modal-background");
     var loginForm = $(".login-form");
+    var navChild = $("nav.navbar-default").children();
+
     
     $("#login-button").click( function () {
         modalBack.fadeIn();
@@ -10,11 +12,6 @@ $(document).ready(function () {
         $("#recipe-entry").css("display", "none");
     });
 
-    /*var loginButton = document.querySelector("#login-button");
-
-    loginButton.addEventListener("click", )
-
-    console.log(loginButton);*/
 
     var hideRegisterForm = function() {
         $(".whole-reg-form").css("display", "none");
@@ -31,10 +28,16 @@ $(document).ready(function () {
         $(".whole-reg-form").fadeIn(100);
     });
 
-    $("#create-recipe").click(function() {
-        $("#register-login").css("display", "none");
-        $("#recipe-entry").css("display", "block");
-        modalBack.fadeIn();
+    $("#create-recipe").click(function () {
+
+        if (navChild === "UL") {
+            $("#register-login").css("display", "none");
+            $("#recipe-entry").css("display", "block");
+            modalBack.fadeIn();
+        }
+        else {
+            alert("Please log in to create a recipe");
+        }
     });
 
     $("input[type=submit]").click(function(){
@@ -58,9 +61,4 @@ $(document).ready(function () {
         $("#progressbar li:nth-child(2)").find("span").toggleClass("active");
     });
 
-    //------------------------Previous & Next Buttons--------------------//
-
-    //$(".form-group label.error").wrap("<div></div>");
-
-    //document.querySelectorAll(".")
 });
