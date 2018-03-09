@@ -1,6 +1,7 @@
 ﻿using RecipeFinder.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -11,9 +12,18 @@ namespace RecipeFinder.Models
     {
         private readonly ApplicationDbContext _context;
 
-        public IEnumerable<Recipe> GetAllRecipes()
+        public RecipeRepository(ApplicationDbContext context)
         {
-            return _context.Recipes.ToList();
+            _context = context;
+        }
+
+        public IEnumerable<Recipe> GetRecipes(int page = 1, int pageSize = 9)
+        {
+            return _context.Recipes
+                    .Include(r => r.User)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
         }
 
         public Recipe GetRecipeById(int id)
@@ -24,12 +34,8 @@ namespace RecipeFinder.Models
         public void AddRecipe(Recipe recipe)
         {
             _context.Recipes.Add(recipe);
-            _context.SaveChangesAsync();
         }
 
-        public RecipeRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        
     }
 }
