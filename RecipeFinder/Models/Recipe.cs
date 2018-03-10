@@ -17,7 +17,9 @@ namespace RecipeFinder.Models
 
         public string Instructions { get; set; }
 
+        public HttpPostedFileBase Image { get; set; }
 
+        public string ImageURL { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 
