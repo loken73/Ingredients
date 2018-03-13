@@ -11,20 +11,34 @@ namespace RecipeFinder.Controllers
     public class RecipeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
 
-        public RecipeController(ApplicationDbContext context)
+        public RecipeController(ApplicationDbContext context, ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             _context = context;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         //RecipeRepository recipeRepo = new RecipeRepository(_context);
 
         [HttpPost]
-        public ActionResult Create(RecipeViewModel recipe)
+        public ActionResult Create(RecipeViewModel recipeView)
         {
-            string path = Server.MapPath("~/Content/images/" + recipe.Image.FileName);
+            string path = Server.MapPath("~/Content/images/" + recipeView.Image.FileName);
 
-            recipe.Image.SaveAs(path); 
+            recipeView.Image.SaveAs(path);
+
+            
+
+            Recipe recipe = new Recipe()
+            {
+                Name = recipeView.Name,
+                ShortDescription = recipeView.ShortDescription,
+                ImageURL = path,
+                User = UserMana
+            };
 
             return RedirectToAction("Index", "Home");
         }
