@@ -3,6 +3,7 @@ using RecipeFinder.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -50,11 +51,11 @@ namespace RecipeFinder.Controllers
         {
             string path = Server.MapPath("~/Content/images/" + RecipeImage.FileName);
 
-            RecipeImage.SaveAs(path);
+            
 
             var currentUser = await UserManager.FindByNameAsync(User.Identity.Name);
 
-            var b = recipeView.Ingredients;
+            string [] viewModelIngredients = Regex.Split(recipeView.Ingredients, "\r\n");
 
             Recipe recipe = new Recipe()
             {
@@ -64,6 +65,20 @@ namespace RecipeFinder.Controllers
                 User = currentUser,
                 Instructions = recipeView.Instructions
             };
+
+            foreach(string ingredient in viewModelIngredients)
+            {
+                Ingredient ing = new Ingredient()
+                {
+                    Name = ingredient
+                };
+
+                recipe.Ingredients.Add(ing);
+            }
+
+
+
+            RecipeImage.SaveAs(path);
 
             return RedirectToAction("Index", "Home");
         }
