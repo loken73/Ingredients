@@ -1,4 +1,4 @@
-﻿@model RecipeFinder.Models.Recipe
+﻿@model RecipeFinder.Models.RecipeViewModel
 
 <div id="recipe-entry">
     @using (Html.BeginForm("Create", "Recipe", FormMethod.Post, new { role = "form" }))
@@ -7,13 +7,13 @@
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="form-group log-reg-forms">
             <!--<div class="glyphicon-wrapper"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>-->
-            <input class="login-input form-control" type="text" placeholder="Recipe Name...">
+            <!--<input class="login-input form-control" type="text" placeholder="Recipe Name...">-->
             @Html.TextBoxFor(r => r.Name, new { @class = "form-control login-input", placeholder = "Recipe Name...", name = "recipeName" })
         </div>
         <div class="form-group log-reg-forms">
             <!--<div class="glyphicon-wrapper"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>-->
-            <input class="login-input form-control" type="text" placeholder="Short Description">
-            @Html.TextBoxFor(r => r.Name, new { @class = "form-control login-input", placeholder = "Recipe Name...", name = "recipeName" })
+            <!--<input class="login-input form-control" type="text" placeholder="Short Description">-->
+            @Html.TextBoxFor(r => r.ShortDescription, new { @class = "form-control login-input", placeholder = "Recipe Name...", name = "recipeName" })
         </div>
         <div class="form-group log-reg-forms">
             <!--<textarea class="form-control" cols="100" rows="5" placeholder="Please place each ingredient on a separate line"></textarea>-->
@@ -26,9 +26,9 @@
         <div class="form-group">
             <label>
                 Choose photo to upload
-                <input value="Choose Photo" type="file" id="recipe-photo" accept=".jpg, .jpeg, .png">
+                <!--<input value="Choose Photo" type="file" id="recipe-photo" accept=".jpg, .jpeg, .png">-->
+                @Html.TextBoxFor(r => r.Image, new { type = "file", id = "recipe-photo", accept = ".jpg, .jpeg, .png" })
             </label>
-            @*Html.TextBoxFor(r => r., new { type = "file", id = "recipe-photo", accept = ".jpg, .jpeg, .png" })*@
         </div>
         <input type="submit" value="Create Recipe">
     }

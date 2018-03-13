@@ -30,14 +30,14 @@ $(document).ready(function () {
 
     $("#create-recipe").click(function () {
 
-        if (navChild === "UL") {
+        //if (navChild !== "UL") {
             $("#register-login").css("display", "none");
             $("#recipe-entry").css("display", "block");
             modalBack.fadeIn();
-        }
-        else {
-            alert("Please log in to create a recipe");
-        }
+        //}
+        //else {
+        //    alert("Please log in to create a recipe");
+        //}
     });
 
     $("input[type=submit]").click(function(){
