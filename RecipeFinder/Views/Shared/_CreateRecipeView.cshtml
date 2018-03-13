@@ -1,7 +1,7 @@
 ﻿@model RecipeFinder.Models.RecipeViewModel
 
 <div id="recipe-entry">
-    @using (Html.BeginForm("Create", "Recipe", FormMethod.Post, new { role = "form" }))
+    @using (Html.BeginForm("Create", "Recipe", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <h2>Create Recipe</h2>
         @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -26,8 +26,8 @@
         <div class="form-group">
             <label>
                 Choose photo to upload
-                <!--<input value="Choose Photo" type="file" id="recipe-photo" accept=".jpg, .jpeg, .png">-->
-                @Html.TextBoxFor(r => r.Image, new { type = "file", id = "recipe-photo", accept = ".jpg, .jpeg, .png" })
+                <input value="Choose Photo" type="file" id="recipe-photo" accept=".jpg, .jpeg, .png" name = "RecipeImage">
+                @*@Html.TextBoxFor(new { type = "file", id = "recipe-photo", name = "RecipeImage", accept = ".jpg, .jpeg, .png" }) *@
             </label>
         </div>
         <input type="submit" value="Create Recipe">

@@ -1,4 +1,5 @@
-﻿using RecipeFinder.Models;
+﻿using Microsoft.AspNet.Identity.Owin;
+using RecipeFinder.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,33 +12,57 @@ namespace RecipeFinder.Controllers
     public class RecipeController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private ApplicationSignInManager _signInManager;
+        //private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        public RecipeController()
+        {
+        }
 
         public RecipeController(ApplicationDbContext context, ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             _context = context;
-            _signInManager = signInManager;
-            _userManager = userManager;
+            //_signInManager = signInManager;
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
         //RecipeRepository recipeRepo = new RecipeRepository(_context);
 
-        [HttpPost]
-        public ActionResult Create(RecipeViewModel recipeView)
+        public ActionResult Create ()
         {
-            string path = Server.MapPath("~/Content/images/" + recipeView.Image.FileName);
+            return RedirectToAction("Index", "Home");
+        }
 
-            recipeView.Image.SaveAs(path);
+        [HttpPost]
+        public async Task<ActionResult> Create(RecipeViewModel recipeView, HttpPostedFileBase RecipeImage)
+        {
+            string path = Server.MapPath("~/Content/images/" + RecipeImage.FileName);
 
-            
+            RecipeImage.SaveAs(path);
+
+            var currentUser = await UserManager.FindByNameAsync(User.Identity.Name);
+
+            var b = recipeView.Ingredients;
 
             Recipe recipe = new Recipe()
             {
                 Name = recipeView.Name,
                 ShortDescription = recipeView.ShortDescription,
                 ImageURL = path,
-                User = UserMana
+                User = currentUser,
+                Instructions = recipeView.Instructions
             };
 
             return RedirectToAction("Index", "Home");
